@@ -18,7 +18,8 @@ class _LanguageTranslationState extends State<LanguageTranslation> {
   bool isTranslating = false;
   TextEditingController languageController = TextEditingController();
 
-  void translateAndAnalyzeSentiment(String src, String dest, String input) async {
+  void translateAndAnalyzeSentiment(
+      String src, String dest, String input) async {
     if (src == '--' || dest == '--') {
       setState(() {
         output = "Please select both languages.";
@@ -33,7 +34,8 @@ class _LanguageTranslationState extends State<LanguageTranslation> {
     });
 
     try {
-      GoogleTranslator translator = GoogleTranslator();
+      GoogleTranslator translator =
+          GoogleTranslator(); // made an object translator
       var translation = await translator.translate(input, from: src, to: dest);
       setState(() {
         output = translation.text;
@@ -56,7 +58,8 @@ class _LanguageTranslationState extends State<LanguageTranslation> {
     final analysis = sentiment.analysis(text);
 
     setState(() {
-      sentimentResult = "Your Sentiment: ${analysis['score'] > 0 ? 'Positive' : analysis['score'] < 0 ? 'Negative' : 'Neutral'}";
+      sentimentResult =
+          "Your Sentiment: ${analysis['score'] > 0 ? 'Positive' : analysis['score'] < 0 ? 'Negative' : 'Neutral'}"; // the compiler calculates the sentiment score based on our input text here
     });
   }
 
@@ -173,9 +176,13 @@ class _LanguageTranslationState extends State<LanguageTranslation> {
               Padding(
                 padding: const EdgeInsets.all(8),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.white),
                   onPressed: () {
-                    translateAndAnalyzeSentiment(getLanguageCode(originLanguage), getLanguageCode(destinationLanguage), languageController.text);
+                    translateAndAnalyzeSentiment(
+                        getLanguageCode(originLanguage),
+                        getLanguageCode(destinationLanguage),
+                        languageController.text);
                   },
                   child: const Text("Translate & Analyze"),
                 ),
